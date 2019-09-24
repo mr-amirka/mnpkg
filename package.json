@@ -1,0 +1,32 @@
+{
+  "name": "mnpkg",
+  "version": "0.0.0",
+  "description": "Downloader and installer of deb package by download link",
+  "main": "./index.js",
+  "keywords": [
+    "deb",
+    "package",
+    "deb package",
+    "downloader",
+    "installer",
+    "link",
+    "url",
+    "cli"
+  ],
+  "bin": {
+    "mnpkg": "./index.js"
+  },
+  "author": {
+    "name": "Amir Absolutely",
+    "email": "mr.amirka@ya.ru",
+    "url": "https://github.com/mr-amirka"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mr-amirka/mnpkg.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.18.0"
+  }
+}
