@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const program = require("commander");
 const { exec } = require('child_process');
+const Deal = require("mn-utils/deal");
 const pkg = require("./package.json");
 
 program
@@ -18,22 +19,26 @@ program.parse(process.argv);
 
 const { link } = program;
 
-const run = expression => new Promise((resolve, reject) => {
+const run = expression => new Deal((resolve, reject) => {
   exec(expression, (error, stdout, stderr) => {
     if (error) {
-      console.error(error);
-      reject(true);
+      reject(error);
       return;
     }
     console.log(stdout);
     console.error(stderr);
-    resolve(true);
+    resolve();
   });
 });
 
 const link_parts = link.split('/');
-const path = './' + link_parts[link_parts.length - 1];
+const name = link_parts[link_parts.length - 1];
+const path = './' + name;
 
 run(`wget ${link}`)
   .then(() => run(`dpkg -i ${path}`))
-  .then(() => run(`rm -rf ${path}`));
+  .then(
+    () => console.log(`Installed ${name}`),
+    e => console.error(`${e}`)
+  )
+  .finally(() => run(`rm -f ${path}`).finally());

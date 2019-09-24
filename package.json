@@ -1,6 +1,6 @@
 {
   "name": "mnpkg",
-  "version": "0.0.0",
+  "version": "0.0.6",
   "description": "Downloader and installer of deb package by download link",
   "main": "./index.js",
   "keywords": [
@@ -27,6 +27,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "commander": "^2.18.0"
+    "commander": "^2.18.0",
+    "mn-utils": "*"
   }
 }
