@@ -1,6 +1,6 @@
 {
   "name": "mnpkg",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Downloader and installer of deb package by download link",
   "main": "./index.js",
   "keywords": [

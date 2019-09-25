@@ -25,8 +25,8 @@ const run = expression => new Deal((resolve, reject) => {
       reject(error);
       return;
     }
-    console.log(stdout);
-    console.error(stderr);
+    stdout && console.log(stdout);
+    stderr && console.error(stderr);
     resolve();
   });
 });
