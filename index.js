@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const program = require("commander");
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 const Deal = require("mn-utils/deal");
 const pkg = require("./package.json");
 
@@ -16,17 +16,15 @@ program.on("--help", () => {
 });
 
 program.parse(process.argv);
-
 const { link } = program;
 
-const run = expression => new Deal((resolve, reject) => {
-  exec(expression, (error, stdout, stderr) => {
-    if (error) {
-      reject(error);
+const run = (name, expressions) => new Deal((resolve, reject) => {
+  spawn(name, expressions, { stdio: 'inherit' }).on('close', (code) => {
+    if (code !== 0) {
+      console.log(`grep process exited with code ${code}`);
+      reject();
       return;
     }
-    stdout && console.log(stdout);
-    stderr && console.error(stderr);
     resolve();
   });
 });
@@ -35,10 +33,10 @@ const link_parts = link.split('/');
 const name = link_parts[link_parts.length - 1];
 const path = './' + name;
 
-run(`wget ${link}`)
-  .then(() => run(`dpkg -i ${path}`))
+run('wget', [ link ])
+  .then(() => run('dpkg', [ '-i', path ]))
   .then(
     () => console.log(`Installed ${name}`),
     e => console.error(`${e}`)
   )
-  .finally(() => run(`rm -f ${path}`).finally());
+  .finally(() => run('rm', [ '-f', path ]).finally());
