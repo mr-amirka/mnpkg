@@ -21,7 +21,7 @@ const { link } = program;
 const run = (name, expressions) => new Deal((resolve, reject) => {
   spawn(name, expressions, { stdio: 'inherit' }).on('close', (code) => {
     if (code !== 0) {
-      console.log(`grep process exited with code ${code}`);
+      console.log(`process exited with code ${code}\n`);
       reject();
       return;
     }
@@ -36,7 +36,7 @@ const path = './' + name;
 run('wget', [ link ])
   .then(() => run('dpkg', [ '-i', path ]))
   .then(
-    () => console.log(`Installed ${name}`),
+    () => console.log(`Installed ${name}\n`),
     e => console.error(`${e}`)
   )
   .finally(() => run('rm', [ '-f', path ]).finally());
