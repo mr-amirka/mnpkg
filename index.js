@@ -35,8 +35,5 @@ const path = './' + name;
 
 run('wget', [ link ])
   .then(() => run('dpkg', [ '-i', path ]))
-  .then(
-    () => console.log(`Installed ${name}\n`),
-    e => console.error(`${e}`)
-  )
+  .then(() => console.log(`Installed ${name}\n`)
   .finally(() => run('rm', [ '-f', path ]).finally());
