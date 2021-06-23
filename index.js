@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 const program = require("commander");
-const { spawn } = require('child_process');
-const Deal = require("mn-utils/deal");
+const {spawn} = require('child_process');
 const pkg = require("./package.json");
 
 program
@@ -16,9 +15,9 @@ program.on("--help", () => {
 });
 
 program.parse(process.argv);
-const { link } = program;
+const {link} = program;
 
-const run = (name, expressions) => new Deal((resolve, reject) => {
+const run = (name, expressions) => new Promise((resolve, reject) => {
   spawn(name, expressions, { stdio: 'inherit' }).on('close', (code) => {
     if (code !== 0) {
       console.log(`process exited with code ${code}\n`);
@@ -36,4 +35,4 @@ const path = './' + name;
 run('wget', [ link ])
   .then(() => run('dpkg', [ '-i', path ]))
   .then(() => console.log(`Installed ${name}\n`))
-  .finally(() => run('rm', [ '-f', path ]).finally());
+  .finally(() => run('rm', [ '-f', path ]));

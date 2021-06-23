@@ -1,6 +1,6 @@
 {
   "name": "mnpkg",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Downloader and installer of deb package by download link",
   "main": "./index.js",
   "keywords": [
@@ -17,17 +17,16 @@
     "mnpkg": "./index.js"
   },
   "author": {
-    "name": "Amir Absolutely",
+    "name": "Amir Absalyamov",
     "email": "mr.amirka@ya.ru",
     "url": "https://github.com/mr-amirka"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:mr-amirka/mnpkg.git"
+    "url": "https://github.com/mr-amirka/mnpkg.git"
   },
   "license": "MIT",
   "dependencies": {
-    "commander": "^2.18.0",
-    "mn-utils": "*"
+    "commander": "^2.18.0"
   }
 }
